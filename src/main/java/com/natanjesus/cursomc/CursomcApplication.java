@@ -1,8 +1,6 @@
 package com.natanjesus.cursomc;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.natanjesus.cursomc.domain.Categoria;
 import com.natanjesus.cursomc.domain.Cidade;
+import com.natanjesus.cursomc.domain.Cliente;
+import com.natanjesus.cursomc.domain.Endereco;
 import com.natanjesus.cursomc.domain.Estado;
 import com.natanjesus.cursomc.domain.Produto;
+import com.natanjesus.cursomc.domain.enumeration.TipoCliente;
 import com.natanjesus.cursomc.services.CategoriaService;
 import com.natanjesus.cursomc.services.CidadeService;
+import com.natanjesus.cursomc.services.ClienteService;
+import com.natanjesus.cursomc.services.EnderecoService;
 import com.natanjesus.cursomc.services.EstadoService;
 import com.natanjesus.cursomc.services.ProdutoService;
 
@@ -32,6 +35,12 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	CidadeService cidadeService;
+	
+	@Autowired
+	ClienteService clienteService;
+	
+	@Autowired
+	EnderecoService enderecoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -68,6 +77,17 @@ public class CursomcApplication implements CommandLineRunner {
 		est2.setCidades(Arrays.asList(cid2, cid3));
 		
 		this.cidadeService.saveAll(Arrays.asList(cid1, cid2, cid3));
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		
+		Endereco end1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cid1, cli1);
+		Endereco end2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cid2, cli1);	
+		
+		cli1.setEnderecos(Arrays.asList(end1, end2));
+		
+		this.clienteService.saveAll(Arrays.asList(cli1));
+		this.enderecoService.saveAll(Arrays.asList(end1, end2));
 		
 	}
 
