@@ -1,5 +1,6 @@
 package com.natanjesus.cursomc.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +16,8 @@ import javax.persistence.OneToMany;
 import com.natanjesus.cursomc.domain.enumeration.TipoCliente;
 
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +28,11 @@ public class Cliente {
 	private String documento;
 	private Integer tipo;
 	
-	@OneToMany(mappedBy="cidade")
+	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos;
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos;
 	
 	@ElementCollection
 	@CollectionTable(name="telefone")
@@ -90,6 +95,14 @@ public class Cliente {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	public Set<String> getTelefones() {
