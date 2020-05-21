@@ -7,19 +7,15 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Embeddable
 public class ItemPedidoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
-	@JsonManagedReference
 	@JoinColumn(name="pedido_fk", foreignKey = @ForeignKey(name="pedido_id"))
 	private Pedido pedido;
 	
 	@ManyToOne
-	@JsonManagedReference
 	@JoinColumn(name="produto_fk", foreignKey = @ForeignKey(name="produto_id"))
 	private Produto produto;
 	

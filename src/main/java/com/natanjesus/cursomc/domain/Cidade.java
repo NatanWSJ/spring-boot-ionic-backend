@@ -12,8 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.UniqueConstraint;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +29,6 @@ public class Cidade implements Serializable {
 	   foreignKey = @ForeignKey(name="cidade_fk"),
 	   inverseForeignKey = @ForeignKey(name="estado_fk"),
 	   uniqueConstraints = @UniqueConstraint(name="cidade_estado_uk", columnNames={"cidade_id", "estado_id"}))
-	@JsonManagedReference
 	private Estado estado;
 	
 	public Cidade() {
