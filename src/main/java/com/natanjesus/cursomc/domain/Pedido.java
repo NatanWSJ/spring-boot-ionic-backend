@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -35,9 +37,11 @@ public class Pedido implements Serializable {
 	private Cliente cliente;
 	
 	@OneToMany(mappedBy="id.pedido")
+	@JsonBackReference
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
+	@JsonBackReference
 	private Pagamento pagamento;
 	
 	public Pedido() {
