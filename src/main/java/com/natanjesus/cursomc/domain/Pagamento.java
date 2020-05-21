@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.natanjesus.cursomc.domain.enumeration.EstadoPagamento;
 
 @Entity
@@ -26,7 +26,7 @@ public abstract class Pagamento implements Serializable {
 	
 	@MapsId
 	@OneToOne
-	@JsonManagedReference
+	@JsonBackReference
 	@JoinColumn(name="pedido_fk", foreignKey = @ForeignKey(name="pedido_id"))
 	private Pedido pedido;
 
