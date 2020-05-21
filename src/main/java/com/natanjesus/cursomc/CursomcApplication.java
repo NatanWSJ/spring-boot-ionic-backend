@@ -14,6 +14,7 @@ import com.natanjesus.cursomc.domain.Cidade;
 import com.natanjesus.cursomc.domain.Cliente;
 import com.natanjesus.cursomc.domain.Endereco;
 import com.natanjesus.cursomc.domain.Estado;
+import com.natanjesus.cursomc.domain.ItemPedido;
 import com.natanjesus.cursomc.domain.Pagamento;
 import com.natanjesus.cursomc.domain.PagamentoComBoleto;
 import com.natanjesus.cursomc.domain.PagamentoComCartao;
@@ -26,6 +27,7 @@ import com.natanjesus.cursomc.services.CidadeService;
 import com.natanjesus.cursomc.services.ClienteService;
 import com.natanjesus.cursomc.services.EnderecoService;
 import com.natanjesus.cursomc.services.EstadoService;
+import com.natanjesus.cursomc.services.ItemPedidoService;
 import com.natanjesus.cursomc.services.PagamentoService;
 import com.natanjesus.cursomc.services.PedidoService;
 import com.natanjesus.cursomc.services.ProdutoService;
@@ -56,7 +58,10 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	PagamentoService pagamentoService;
-
+	
+	@Autowired
+	ItemPedidoService itemPedidoService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
@@ -118,6 +123,19 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		this.pedidoService.saveAll(Arrays.asList(ped1, ped2));
 		this.pagamentoService.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, prod1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, prod2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		prod1.getItens().addAll(Arrays.asList(ip1));
+		prod2.getItens().addAll(Arrays.asList(ip2));
+		prod3.getItens().addAll(Arrays.asList(ip3));
+		
+		this.itemPedidoService.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 	}
 
