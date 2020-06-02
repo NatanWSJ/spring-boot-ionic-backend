@@ -28,8 +28,9 @@ public class CategoriaService {
 				);
 	}
 	
-	public Categoria save(Categoria categoria) {
-		return this.save(categoria);
+	public Categoria insert(Categoria categoria) {
+		categoria.setId(null);
+		return this.categoriaRepository.save(categoria);
 	}
 	
 	public void saveAll(List<Categoria> categorias) {
