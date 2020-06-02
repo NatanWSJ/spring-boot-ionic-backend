@@ -28,9 +28,18 @@ public class CategoriaService {
 				);
 	}
 	
-	public Categoria insert(Categoria categoria) {
-		categoria.setId(null);
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return this.categoriaRepository.save(obj);
+	}
+	
+	public Categoria update(Categoria categoria) {
 		return this.categoriaRepository.save(categoria);
+	}
+	public Categoria update(Integer id, Categoria categoria) {
+		this.findById(id);
+		categoria.setId(id);
+		return this.update(categoria);
 	}
 	
 	public void saveAll(List<Categoria> categorias) {

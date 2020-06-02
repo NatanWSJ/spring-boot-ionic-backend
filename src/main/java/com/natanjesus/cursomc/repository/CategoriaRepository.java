@@ -8,4 +8,6 @@ import com.natanjesus.cursomc.domain.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 	
+	boolean existsCategoriaById(Integer id);
+	
 }
