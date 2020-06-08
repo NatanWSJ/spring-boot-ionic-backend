@@ -3,6 +3,7 @@ package com.natanjesus.cursomc.resources;
 import java.net.URI;
 import java.util.List;
 
+import com.natanjesus.cursomc.dto.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ public class CategoriaResource {
 	CategoriaService categoriaService;
 
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Categoria>> findAll() {
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		return ResponseEntity.ok(this.categoriaService.findAll());
 	}
 

@@ -2,7 +2,9 @@ package com.natanjesus.cursomc.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.natanjesus.cursomc.dto.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,10 @@ public class CategoriaService {
 	@Autowired
 	CategoriaRepository categoriaRepository;
 
-	public List<Categoria> findAll() {
-		return this.categoriaRepository.findAll();
+	public List<CategoriaDTO> findAll() {
+		List<Categoria> list = this.categoriaRepository.findAll();
+		List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return listDTO;
 	}
 
 	public Categoria findById(Integer id) {
