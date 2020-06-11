@@ -47,9 +47,9 @@ public class CategoriaResource {
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0")Integer page,
 			@RequestParam(value="size", defaultValue="24")Integer size,
-			@RequestParam(value="orderBy", defaultValue="nome")String orderBy,
-			@RequestParam(value="direction", defaultValue="ASC")String direction) {
-		return ResponseEntity.ok(this.categoriaService.findPage(page, size, orderBy, direction));
+			@RequestParam(value="direction", defaultValue="ASC")String direction,
+			@RequestParam(value="orderBy", defaultValue="nome")String orderBy) {
+		return ResponseEntity.ok(this.categoriaService.findPage(page, size, direction, orderBy));
 	}
 
 

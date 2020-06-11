@@ -61,7 +61,7 @@ public class CategoriaService {
 		this.categoriaRepository.saveAll(categorias);
 	}
 
-	public Page<CategoriaDTO> findPage(Integer page, Integer size, String orderBy, String direction) {
+	public Page<CategoriaDTO> findPage(Integer page, Integer size, String direction, String orderBy) {
 		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.valueOf(direction), orderBy);
 		Page<Categoria> categorias = this.categoriaRepository.findAll(pageRequest);
 		return categorias.map(categoria -> new CategoriaDTO(categoria));
