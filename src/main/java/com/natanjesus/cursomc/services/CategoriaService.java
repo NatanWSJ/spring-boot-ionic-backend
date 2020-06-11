@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import com.natanjesus.cursomc.dto.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.natanjesus.cursomc.domain.Categoria;
@@ -56,6 +59,12 @@ public class CategoriaService {
 	
 	public void saveAll(List<Categoria> categorias) {
 		this.categoriaRepository.saveAll(categorias);
+	}
+
+	public Page<CategoriaDTO> findPage(Integer page, Integer size, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.valueOf(direction), orderBy);
+		Page<Categoria> categorias = this.categoriaRepository.findAll(pageRequest);
+		return categorias.map(categoria -> new CategoriaDTO(categoria));
 	}
 
 }
