@@ -13,6 +13,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.natanjesus.cursomc.domain.Categoria;
 import com.natanjesus.cursomc.services.CategoriaService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
@@ -31,7 +33,8 @@ public class CategoriaResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<URI> insert(@RequestBody Categoria categoria) {
+	public ResponseEntity<URI> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
+		Categoria categoria = this.categoriaService.fromDTO(categoriaDTO);
 		categoria = this.categoriaService.insert(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				  .path("/{id}").buildAndExpand(categoria.getId()).toUri();

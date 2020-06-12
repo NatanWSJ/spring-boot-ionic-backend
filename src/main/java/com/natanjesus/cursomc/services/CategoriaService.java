@@ -37,9 +37,9 @@ public class CategoriaService {
 				);
 	}
 	
-	public Categoria insert(Categoria obj) {
-		obj.setId(null);
-		return this.categoriaRepository.save(obj);
+	public Categoria insert(Categoria categoria) {
+		categoria.setId(null);
+		return this.categoriaRepository.save(categoria);
 	}
 	
 	public Categoria update(Integer id, Categoria categoria) {
@@ -65,6 +65,10 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.valueOf(direction), orderBy);
 		Page<Categoria> categorias = this.categoriaRepository.findAll(pageRequest);
 		return categorias.map(categoria -> new CategoriaDTO(categoria));
+	}
+
+	public Categoria fromDTO(CategoriaDTO categoria) {
+		return new Categoria(categoria.getId(), categoria.getNome());
 	}
 
 }
