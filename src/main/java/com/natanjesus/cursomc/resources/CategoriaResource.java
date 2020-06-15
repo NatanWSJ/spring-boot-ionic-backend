@@ -54,7 +54,5 @@ public class CategoriaResource {
 			@RequestParam(value="orderBy", defaultValue="nome")String orderBy) {
 		return ResponseEntity.ok(this.categoriaService.findPage(page, size, direction, orderBy));
 	}
-
-
 	
 }

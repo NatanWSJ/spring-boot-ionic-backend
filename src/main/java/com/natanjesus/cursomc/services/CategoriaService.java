@@ -1,10 +1,10 @@
 package com.natanjesus.cursomc.services;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import com.natanjesus.cursomc.domain.Categoria;
 import com.natanjesus.cursomc.dto.CategoriaDTO;
+import com.natanjesus.cursomc.repository.CategoriaRepository;
+import com.natanjesus.cursomc.services.exceptions.DataIntegrityException;
+import com.natanjesus.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -12,10 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.natanjesus.cursomc.domain.Categoria;
-import com.natanjesus.cursomc.repository.CategoriaRepository;
-import com.natanjesus.cursomc.services.exceptions.DataIntegrityException;
-import com.natanjesus.cursomc.services.exceptions.ObjectNotFoundException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService {
@@ -41,10 +40,10 @@ public class CategoriaService {
 		categoria.setId(null);
 		return this.categoriaRepository.save(categoria);
 	}
-	
+
 	public Categoria update(Integer id, Categoria categoria) {
-		this.findById(id);
-		categoria.setId(id);
+		Categoria categoriaData = this.findById(id);
+		this.updateData(categoriaData, categoria);
 		return this.categoriaRepository.save(categoria);
 	}
 	
@@ -71,4 +70,8 @@ public class CategoriaService {
 		return new Categoria(categoria.getId(), categoria.getNome());
 	}
 
+	private void updateData(Categoria categoriaData, Categoria categoria){
+		categoriaData.setNome(categoria.getNome());
+	}
+	
 }

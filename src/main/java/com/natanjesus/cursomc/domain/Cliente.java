@@ -5,13 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.natanjesus.cursomc.domain.enumeration.TipoCliente;
@@ -30,7 +24,7 @@ public class Cliente implements Serializable {
 	private Integer tipo;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos;
 	
 	@JsonIgnore
@@ -49,7 +43,7 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.documento = documento;
-		this.tipo = tipo.getCod();
+		this.tipo = tipo != null ? tipo.getCod() : null;
 	}
 
 	public Integer getId() {
