@@ -1,6 +1,7 @@
 package com.natanjesus.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,17 +20,20 @@ public class Cliente implements Serializable {
 	private Integer id;
 	
 	private String nome;
+
+	@Column(unique=true)
 	private String email;
+
 	private String documento;
 	private Integer tipo;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
-	private List<Endereco> enderecos;
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
-	private List<Pedido> pedidos;
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name="telefone")

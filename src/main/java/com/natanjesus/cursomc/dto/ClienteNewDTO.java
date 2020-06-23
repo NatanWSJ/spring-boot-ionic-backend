@@ -30,7 +30,7 @@ public class ClienteNewDTO implements Serializable {
     @NotEmpty(message="Preenchimento obrigatório")
     private String numero;
 
-    private String complento;
+    private String complemento;
     private String bairro;
 
     @NotEmpty(message="Preenchimento obrigatório")
@@ -87,11 +87,11 @@ public class ClienteNewDTO implements Serializable {
         this.numero = numero;
     }
 
-    public String getComplento() {
-        return complento;
+    public String getComplemento() {
+        return complemento;
     }
-    public void setComplento(String complento) {
-        this.complento = complento;
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 
     public String getBairro() {

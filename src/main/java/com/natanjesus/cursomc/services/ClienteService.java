@@ -84,7 +84,7 @@ public class ClienteService {
 	public Cliente fromDTO(ClienteNewDTO cliente) {
 		Cliente clienteNew = new Cliente(null, cliente.getNome(), cliente.getEmail(), cliente.getDocumento(), TipoCliente.toEnum(cliente.getTipo()));
 		Cidade cidade = new Cidade(cliente.getCidadeId(), null, null);
-		Endereco enderecoNew = new Endereco(null, cliente.getLogradouro(), cliente.getNumero(), cliente.getComplento(), cliente.getBairro(), cliente.getCep(), cidade, clienteNew);
+		Endereco enderecoNew = new Endereco(null, cliente.getLogradouro(), cliente.getNumero(), cliente.getComplemento(), cliente.getBairro(), cliente.getCep(), cidade, clienteNew);
 		clienteNew.getEnderecos().add(enderecoNew);
 		clienteNew.getTelefones().add(cliente.getTelefone1());
 		if (cliente.getTelefone2() != null && !cliente.getTelefone2().isEmpty()){
