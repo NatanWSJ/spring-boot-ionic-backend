@@ -74,16 +74,18 @@ public class CursomcApplication implements CommandLineRunner {
 		Categoria cat3 = new Categoria(null, "Eletrônicos");
 		Categoria cat4 = new Categoria(null, "Jardinagem");
 		Categoria cat5 = new Categoria(null, "Perfumaria");
-		
-		this.categoriaService.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5));
+		Categoria cat6 = new Categoria(null, "Decoração");
+		Categoria cat7 = new Categoria(null, "Cama Mesa e Banho");
+
+		this.categoriaService.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		
 		Produto prod1 = new Produto(null, "Computador", 2000.00);
 		Produto prod2 = new Produto(null, "Impressora", 800.00);
 		Produto prod3 = new Produto(null, "Mouse", 80.00);
 		
-		prod1.setCategorias(Arrays.asList(cat1));
-		prod2.setCategorias(Arrays.asList(cat1, cat2));
-		prod3.setCategorias(Arrays.asList(cat1));
+		prod1.setCategorias(Arrays.asList(cat1, cat2, cat3));
+		prod2.setCategorias(Arrays.asList(cat4, cat5, cat6));
+		prod3.setCategorias(Arrays.asList(cat7));
 		
 		this.produtoService.saveAll(Arrays.asList(prod1, prod2, prod3));
 		
