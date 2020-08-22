@@ -2,7 +2,9 @@ package com.natanjesus.cursomc.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +31,12 @@ public class ItemPedidoService {
 	}
 	
 	public ItemPedido save(ItemPedido itemPedido) {
-		return this.save(itemPedido);
+		return this.itemPedidoRepository.save(itemPedido);
 	}
-	
+
+	public void saveAll(Set<ItemPedido> itemPedidos) {
+		this.itemPedidoRepository.saveAll(itemPedidos);
+	}
 	public void saveAll(List<ItemPedido> itemPedidos) {
 		this.itemPedidoRepository.saveAll(itemPedidos);
 	}

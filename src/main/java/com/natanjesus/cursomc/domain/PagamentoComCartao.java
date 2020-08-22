@@ -1,10 +1,12 @@
 package com.natanjesus.cursomc.domain;
 
-import javax.persistence.Entity;
-
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.natanjesus.cursomc.domain.enumeration.EstadoPagamento;
 
+import javax.persistence.Entity;
+
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;
 	

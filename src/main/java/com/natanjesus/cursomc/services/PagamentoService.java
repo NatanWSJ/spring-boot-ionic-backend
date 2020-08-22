@@ -29,7 +29,7 @@ public class PagamentoService {
 	}
 	
 	public Pagamento save(Pagamento pagamento) {
-		return this.save(pagamento);
+		return this.pagamentoRepository.save(pagamento);
 	}
 	
 	public void saveAll(List<Pagamento> pagamentos) {
